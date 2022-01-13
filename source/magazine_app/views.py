@@ -51,6 +51,15 @@ def update(request, pk):
         return render(request, 'update.html', context={'product': product, 'form': form})
 
 
+def delete(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'GET':
+        return render(request, "delete.html", {"product": product})
+    else:
+        product.delete()
+        return redirect("index")
+
+
 def view(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'view.html', context={'product': product})
