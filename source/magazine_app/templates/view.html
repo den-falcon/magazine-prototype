@@ -1,0 +1,13 @@
+
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>{{  product.name }} ({{ product.price }} $)</h1>
+        <h3>Описание:</h3>
+        <p>{{ task.description }}</p>
+        <p>Категория: {{ task.category }}</p>
+        <p>Остаток: {{ task.reamainder }}</p>
+        <br>
+        <p><a href="{% url "index" %}" class="btn btn-outline-dark">На главную</a></p>
+    </div>
+{% endblock %}
