@@ -1,0 +1,57 @@
+[
+{
+    "model": "magazine_app.product",
+    "pk": 2,
+    "fields": {
+        "name": "BEERка",
+        "description": "Сушеная рыба",
+        "category": "other",
+        "remainder": 4,
+        "price": "10.00"
+    }
+},
+{
+    "model": "magazine_app.product",
+    "pk": 3,
+    "fields": {
+        "name": "Егерь",
+        "description": "Мощный игровой компьютер",
+        "category": "electronics",
+        "remainder": 3,
+        "price": "350.00"
+    }
+},
+{
+    "model": "magazine_app.product",
+    "pk": 4,
+    "fields": {
+        "name": "Куртка",
+        "description": "Зимняя куртка с мехом бобра и подкладкой из овчинной шерсти",
+        "category": "clothes",
+        "remainder": 0,
+        "price": "25.00"
+    }
+},
+{
+    "model": "magazine_app.product",
+    "pk": 5,
+    "fields": {
+        "name": "Топор",
+        "description": "Острый топор острый, крепкий и точить не надо",
+        "category": "for_home",
+        "remainder": 2,
+        "price": "15.00"
+    }
+},
+{
+    "model": "magazine_app.product",
+    "pk": 6,
+    "fields": {
+        "name": "Чехол",
+        "description": "Чехол на телефон, вроде как на айфон... ну похож по крайней мере...",
+        "category": "accessories",
+        "remainder": 500,
+        "price": "1.00"
+    }
+}
+]
