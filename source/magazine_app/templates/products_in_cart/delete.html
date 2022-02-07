@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="container">
-        <form action="{% url "product-delete" product.pk %}" method="POST">
+        <form action="{% url "product_in_cart-delete" object.pk %}" method="POST">
         {% csrf_token %}
             <h2>Вы действительно хотите удалить товар?</h2>
             <button type="submit" class="btn btn-outline-danger">Да</button>

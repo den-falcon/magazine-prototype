@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    {% for item in produc_in_cart %}
+        <h1>{{  item.product.name }}</h1>
+        <p>Цена: {{ item.product.price }} $</p>
+        <p>Количество: {{ item.count }}</p>
+        <p>Сумма: {% widthratio item.count 1 item.product.price %}</p>
+        <a href="{% url 'product_in_cart-delete' item.pk %}" class="btn btn-info text-white rounded-0">Удалить с корзины</a>
+        <hr>
+    {% endfor %}
+    </div>
+{% endblock %}

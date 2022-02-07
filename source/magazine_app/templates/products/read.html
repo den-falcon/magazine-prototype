@@ -6,7 +6,24 @@
         <p>{{ product.description }}</p>
         <p>Категория: {{ product.category }}</p>
         <p>Остаток: {{ product.remainder }}</p>
-        <br>
+        <form action="{% url 'product-add-to-cart' product.pk %}" method="post">
+            {% csrf_token %}
+
+            {% for error in form_add_in_cart.non_field_errors %}
+               <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+
+            {% for field in form_add_in_cart %}
+                <div class="input-group mb-3 p-3 pt-0 text-center text-md-start">
+                    <label for="{{ field.id_for_label }}"></label>
+                {% for error in field.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                {{ field }}
+                <button type="submit" class="btn btn-info text-white rounded-0">Добавить в корзину</button>
+                </div>
+            {% endfor %}
+        </form>
         <p><a href="{% url "index" %}" class="btn btn-outline-dark">На главную</a></p>
     </div>
 {% endblock %}

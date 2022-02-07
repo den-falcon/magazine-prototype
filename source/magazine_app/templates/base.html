@@ -25,7 +25,14 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    {% block links %}{% endblock %}
+                    {% block links %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'product-create' %}">Добавить товар</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'product_in_cart-read' %}">Корзина</a>
+                        </li>
+                    {% endblock %}
                 </ul>
               </div>
                 {% block simple_search %}{% endblock %}

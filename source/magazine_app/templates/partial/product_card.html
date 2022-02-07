@@ -8,5 +8,30 @@
     <div class="card-body">
       <p class="card-text">{{ description }}</p>
     </div>
+{#      <div class="input-group mb-3 p-3 pt-0 text-center text-md-start">#}
+{#        <input type="text" class="form-control rounded-0" style="max-width: 50px;" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">#}
+{#        <a class="btn btn-info text-white rounded-0" id="button-addon1">Добавить в корзину</a>#}
+{#      </div>#}
+      <form action="{% url 'product-add-to-cart' pk %}" method="post">
+        {% csrf_token %}
+
+        {% for error in form_add_in_cart.non_field_errors %}
+           <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+
+        {% for field in form_add_in_cart %}
+            <div class="input-group mb-3 p-3 pt-0 text-center text-md-start">
+                <label for="{{ field.id_for_label }}"></label>
+            {% for error in field.errors %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+            {{ field }}
+            <button type="submit" class="btn btn-info text-white rounded-0">Добавить в корзину</button>
+            </div>
+        {% endfor %}
+      </form>
+{#    <div class="p-3 pt-0 text-center text-md-start">#}
+{#        <a href="#" class="btn btn-info text-white rounded-0">Добавить в корзину</a>#}
+{#    </div>#}
   </div>
 </div>
