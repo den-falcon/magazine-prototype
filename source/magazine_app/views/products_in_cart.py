@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DeleteView
 
-from magazine_app.forms import ProductInCartForm
+from magazine_app.forms import ProductInCartForm, OrderForm
 from magazine_app.models import ProductInCart, Product
 
 
@@ -34,6 +34,7 @@ class ProductInCartRead(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
+        context['form_order'] = OrderForm()
         return context
 
 

@@ -9,5 +9,24 @@
         <a href="{% url 'product_in_cart-delete' item.pk %}" class="btn btn-info text-white rounded-0">Удалить с корзины</a>
         <hr>
     {% endfor %}
+        <form action="{% url 'order-create' %}" method="post">
+            {% csrf_token %}
+
+            {% for error in form_order.non_field_errors %}
+               <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+
+            {% for field in form_order %}
+                <br>
+                <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+                {% for error in field.errors %}
+                    <p class="text-danger">{{ error }}</p>
+                {% endfor %}
+                {{ field }}
+                <br>
+            {% endfor %}
+            <br>
+            <input class="btn btn-info text-white rounded-0" type="submit" value='Оформить заказ' />
+        </form>
     </div>
 {% endblock %}
