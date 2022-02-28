@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from .models import Product, ProductInCart, Order
+from magazine_app.models import Product, Cart, Order
 
 
 class ProductForm(forms.ModelForm):
@@ -9,9 +9,9 @@ class ProductForm(forms.ModelForm):
         exclude = []
 
 
-class ProductInCartForm(forms.ModelForm):
+class CartForm(forms.ModelForm):
     class Meta:
-        model = ProductInCart
+        model = Cart
         exclude = ['product']
         # widgets = {
         #     'count': forms.IntegerField(attrs={'class': 'form-control rounded-0', 'style': 'max-width: 50px;'})
@@ -27,6 +27,3 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['name', 'phone', 'address']
-
-
-

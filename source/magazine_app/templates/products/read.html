@@ -5,7 +5,7 @@
         <h3>Описание:</h3>
         <p>{{ product.description }}</p>
         <p>Категория: {{ product.category }}</p>
-        <p>Остаток: {{ product.remainder }}</p>
+        <p>Остаток: {{ product.amount }}</p>
         <form action="{% url 'product-add-to-cart' product.pk %}" method="post">
             {% csrf_token %}
 

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-    {% for item in produc_in_cart %}
+    {% for item in cart %}
         <h1>{{  item.product.name }}</h1>
         <p>Цена: {{ item.product.price }} $</p>
-        <p>Количество: {{ item.count }}</p>
-        <p>Сумма: {% widthratio item.count 1 item.product.price %}</p>
+        <p>Количество: {{ item.qty }}</p>
+        <p>Сумма:  {{ total }}</p>
         <a href="{% url 'product_in_cart-delete' item.pk %}" class="btn btn-info text-white rounded-0">Удалить с корзины</a>
         <hr>
     {% endfor %}
@@ -16,7 +16,7 @@
                <p class="text-danger">{{ error }}</p>
             {% endfor %}
 
-            {% for field in form_order %}
+            {% for field in form %}
                 <br>
                 <p><label for="{{ field.id_for_label }}">{{ field.label }}</label></p>
                 {% for error in field.errors %}

@@ -1,7 +1,7 @@
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
-from magazine_app.forms import ProductForm, ProductInCartForm
+from magazine_app.forms import ProductForm, CartForm
 from magazine_app.models import Product
 from magazine_app.views.base import SearchView
 
@@ -9,21 +9,16 @@ from magazine_app.views.base import SearchView
 class ProductsView(SearchView):
     model = Product
     template_name = 'products/list.html'
-    context_object_name = 'product'
+    context_object_name = 'products'
     ordering = ['name', 'category']
     paginate_by = 5
-    paginate_orphans = 0
     search_fields = ['name__icontains', 'description__icontains']
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        query = self.get_query()
-        context = super().get_context_data(object_list=self.model.objects.filter(remainder__gt=1)
-                                           .filter(query).order_by(*self.ordering), **kwargs)
-        context['form_add_in_cart'] = ProductInCartForm()
-        return context
+    def get_queryset(self):
+        return super().get_queryset().filter(amount__gt=0)
 
 
-class ProductRead(DetailView):
+class ProductView(DetailView):
     model = Product
     context_object_name = "product"
     template_name = 'products/read.html'
@@ -31,7 +26,7 @@ class ProductRead(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = ProductForm()
-        context['form_add_in_cart'] = ProductInCartForm()
+        context['form_add_in_cart'] = CartForm()
         return context
 
 
@@ -39,6 +34,9 @@ class ProductCreate(CreateView):
     model = Product
     form_class = ProductForm
     template_name = "products/create.html"
+
+    def get_success_url(self):
+        return reverse('product-read', kwargs={'pk': self.object.pk})
 
 
 class ProductUpdate(UpdateView):
@@ -54,8 +52,3 @@ class ProductDelete(DeleteView):
     model = Product
     template_name = 'products/delete.html'
     success_url = reverse_lazy('index')
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductDelete, self).get_context_data(**kwargs)
-        print(context)
-        return context
