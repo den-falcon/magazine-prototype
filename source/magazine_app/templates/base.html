@@ -14,35 +14,53 @@
     <title>{% block title %}Tracker{% endblock %}</title>
 </head>
 <body>
-    {% block navbar %}
-        <header class="bg-info mb-5">
-          <nav class="navbar navbar-expand-lg navbar-dark">
+{% block navbar %}
+    <header class="bg-info mb-5">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
-              <a class="navbar-brand text-uppercase fw-bold" href="{% url 'index' %}">У дяди вовы</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    {% block links %}
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'product-create' %}">Добавить товар</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'product_in_cart-read' %}">Корзина</a>
-                        </li>
-                    {% endblock %}
-                </ul>
-              </div>
+                <a class="navbar-brand text-uppercase fw-bold" href="{% url 'shop:index' %}">У дяди вовы</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        {% block links %}
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                   href="{% url 'shop:product_in_cart-read' %}">Корзина</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                {% if perms.magazine_app.add_product %}
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page"
+                                           href="{% url 'shop:product-create' %}">Добавить
+                                            товар</a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'accounts:logout' %}">Выход</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'accounts:registration' %}">Регистрация</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'accounts:login' %}">Вход</a>
+                                </li>
+                            {% endif %}
+                        {% endblock %}
+                    </ul>
+                </div>
                 {% block simple_search %}{% endblock %}
             </div>
-          </nav>
-        </header>
-    {% endblock %}
-    {% block content %}{% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+        </nav>
+    </header>
+{% endblock %}
+{% block content %}{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

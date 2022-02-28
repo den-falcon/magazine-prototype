@@ -4,6 +4,8 @@ from magazine_app.views.orders import OrderCreate
 from magazine_app.views.products import ProductsView, ProductCreate, ProductUpdate, ProductView, ProductDelete
 from magazine_app.views.cart import CartCreate, CartRead, CartDelete
 
+app_name = 'shop'
+
 urlpatterns = [
     path('', ProductsView.as_view(), name='index'),
     path('product/create/', ProductCreate.as_view(), name='product-create'),

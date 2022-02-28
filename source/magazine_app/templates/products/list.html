@@ -11,7 +11,7 @@
         <hr class="text-danger mt-1">
           <div class="row justify-content-start" style="max-width: 40rem;">
               {% for product in object_list %}
-                {% include 'partial/product_card.html' with url='product-read' pk=product.pk name=product.name price=product.price description=product.description %}
+                {% include 'partial/product_card.html' with url='shop:product-read' pk=product.pk name=product.name price=product.price description=product.description %}
               {% endfor %}
           </div>
         </div>

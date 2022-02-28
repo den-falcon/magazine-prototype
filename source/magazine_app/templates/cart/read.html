@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-    {% for item in cart %}
-        <h1>{{  item.product.name }}</h1>
-        <p>Цена: {{ item.product.price }} $</p>
-        <p>Количество: {{ item.qty }}</p>
-        <p>Сумма:  {{ total }}</p>
-        <a href="{% url 'product_in_cart-delete' item.pk %}" class="btn btn-info text-white rounded-0">Удалить с корзины</a>
+    {% for item in products %}
+        <h1>{{  item.name }}</h1>
+        <p>Цена: {{ item.price }} $</p>
+        <p>Количество: ???</p>
+        <p>Сумма:  ???</p>
+        <a href="{% url 'shop:product_in_cart-delete' item.pk %}" class="btn btn-info text-white rounded-0">Удалить с корзины</a>
         <hr>
     {% endfor %}
-        <form action="{% url 'order-create' %}" method="post">
+        <form action="{% url 'shop:order-create' %}" method="post">
             {% csrf_token %}
 
             {% for error in form_order.non_field_errors %}

@@ -6,7 +6,7 @@
         <p>{{ product.description }}</p>
         <p>Категория: {{ product.category }}</p>
         <p>Остаток: {{ product.amount }}</p>
-        <form action="{% url 'product-add-to-cart' product.pk %}" method="post">
+        <form action="{% url 'shop:product-add-to-cart' product.pk %}" method="post">
             {% csrf_token %}
 
             {% for error in form_add_in_cart.non_field_errors %}
@@ -24,6 +24,6 @@
                 </div>
             {% endfor %}
         </form>
-        <p><a href="{% url "index" %}" class="btn btn-outline-dark">На главную</a></p>
+        <p><a href="{% url "shop:index" %}" class="btn btn-outline-dark">На главную</a></p>
     </div>
 {% endblock %}

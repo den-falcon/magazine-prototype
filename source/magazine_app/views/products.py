@@ -14,6 +14,10 @@ class ProductsView(SearchView):
     paginate_by = 5
     search_fields = ['name__icontains', 'description__icontains']
 
+    def get(self, request, *args, **kwargs):
+        print(self.request.session.get('CART', {}))
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         return super().get_queryset().filter(amount__gt=0)
 
